@@ -42,6 +42,15 @@ class ViewController: UIViewController {
         score += points
         round += 1
         
+        var title: String
+        if difference < 5 {
+            title = "You were so close!"
+        } else if difference < 10 {
+            title = "Good try"
+        } else {
+            title = "Not even close.."
+        }
+        
         if sliderValue == targetValue {
             // create a variable that prints a string informing the user of the slider value
             let youWinMessage = "You nailed it!"
@@ -50,7 +59,7 @@ class ViewController: UIViewController {
             let winAlert = UIAlertController(title: "You win!", message: youWinMessage, preferredStyle: .alert)
             
             // create the action (confirm yes or no type button)
-            let winAction = UIAlertAction(title: "Nice!", style: .default, handler: nil)
+            let winAction = UIAlertAction(title: title, style: .default, handler: nil)
             
             winAlert.addAction(winAction)
             
@@ -94,8 +103,6 @@ class ViewController: UIViewController {
         updateLabels()
     }
     
-    
-    // code change test for git
 
 }
 
