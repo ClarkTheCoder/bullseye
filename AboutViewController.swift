@@ -7,7 +7,7 @@
 //
 
 
-// note you must go to attribute selector and connect this view controller to the about view in story board
+// note you must connect this view controller to the about view in story board
 import UIKit
 
 class AboutViewController: UIViewController {
