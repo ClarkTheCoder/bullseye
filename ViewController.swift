@@ -53,13 +53,17 @@ class ViewController: UIViewController {
         
         if sliderValue == targetValue {
             // create a variable that prints a string informing the user of the slider value
-            let youWinMessage = "You nailed it!"
+            
+            // if they get it right they get 200 bonus points
+            score += 200
+            let youWinMessage = "You nailed it!" + "you earned " + String(score) +
+            "points"
             
             // create the alert and set the title, message and style.
             let winAlert = UIAlertController(title: "You win!", message: youWinMessage, preferredStyle: .alert)
             
             // create the action (confirm yes or no type button)
-            let winAction = UIAlertAction(title: title, style: .default, handler: nil)
+            let winAction = UIAlertAction(title: "Congrats!", style: .default, handler: nil)
             
             winAlert.addAction(winAction)
             
@@ -70,14 +74,13 @@ class ViewController: UIViewController {
         } else {
             // create a variable that prints a string informing the user of the slider value
             let message = "You hit the following value: \(sliderValue)" + "\n The target value was: \(targetValue)"
-                + "\n The difference was: \(difference)"
                 + "\n You scored: \(points) points."
             
             // create the alert and set the title, message and style.
-            let alert = UIAlertController(title: "Results", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
             // create the action (confirm yes or no type button)
-            let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            let action = UIAlertAction(title: title, style: .default, handler: nil)
             
             alert.addAction(action)
             
@@ -88,10 +91,16 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func startOver(_ sender: Any) {
+        startNewGame()
+    }
+    
     @IBAction func sliderMoved(_ slider: UISlider) {
         sliderValue = lroundf(slider.value * 100)
     }
     
+    // this function updates the labels and gets called at the start of every new round
     func updateLabels() {
         targetLabel.text = String(targetValue)
         totalScore.text = String(score)
@@ -100,6 +109,13 @@ class ViewController: UIViewController {
     
     func startNewRound() {
         targetValue = Int.random(in: 1...100)
+        updateLabels()
+    }
+    
+    func startNewGame() {
+        score = 0
+        round = 0
+        sliderValue = 50
         updateLabels()
     }
     
